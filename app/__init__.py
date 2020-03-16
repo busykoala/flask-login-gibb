@@ -1,12 +1,29 @@
+from config import Config
+from dotenv import load_dotenv
 from flask import Flask
-from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from pathlib import Path
 
 
+# load environment variables
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
+
+# init application
 app = Flask(__name__)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
-app.config['SECRET_KEY'] = 'whatever'
-app.config['SESSION_TYPE'] = 'filesystem'
+# init login manager and set redirect for unauthorized
+login = LoginManager(app)
+login.login_view = "login"
 
+# load config variables
+app.config.from_object(Config)
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from app import routes  # noqa
+from app import models  # noqa

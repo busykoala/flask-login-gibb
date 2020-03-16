@@ -10,6 +10,10 @@ URL = 'git@gitlab.iet-gibb.ch:mos111952/183_lb3_gruppe2.git'
 REQUIRED = [
     'Flask',
     'flask-login',
+    'flask-migrate',
+    'flask-sqlalchemy',
+    'flask-wtf',
+    'python-dotenv',
 ]
 
 setuptools.setup(
