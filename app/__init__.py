@@ -18,6 +18,8 @@ app = Flask(__name__)
 # init login manager and set redirect for unauthorized
 login = LoginManager(app)
 login.login_view = "login"
+# set to logged out if session has different originating IP
+login.session_protection = "strong"
 
 # load config variables
 app.config.from_object(Config)
