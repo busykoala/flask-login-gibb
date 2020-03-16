@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         salted_pw = f'{SALT}{password}'
-        self.password_hash = generate_password_hash(salted_pw)
+        self.password_hash = generate_password_hash(salted_pw, method='pbkdf2:sha512')
 
     def check_password(self, password):
         salted_pw = f'{SALT}{password}'
