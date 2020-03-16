@@ -3,6 +3,9 @@ from app import login
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
+import os
+
+SALT = os.getenv('SALT')
 
 
 @login.user_loader
@@ -20,7 +23,9 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        salted_pw = f'{SALT}{password}'
+        self.password_hash = generate_password_hash(salted_pw)
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        salted_pw = f'{SALT}{password}'
+        return check_password_hash(self.password_hash, salted_pw)
