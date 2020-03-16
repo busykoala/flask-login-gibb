@@ -16,8 +16,9 @@ python setup.py install
 # initialize the database
 flask db init
 
-# add .env file holding the flask secret (csrf)
-echo "SECRET_KEY=very-secret" > .env
+# add .env file holding the flask secret (csrf) and the password salt
+echo "SECRET_KEY=\"very-secret\"" >> .env
+echo "SALT=\"very-secret\"" >> .env
 ```
 
 ## Migrate
