@@ -9,6 +9,7 @@ AUTHOR = 'gruppe_2'
 URL = 'git@gitlab.iet-gibb.ch:mos111952/183_lb3_gruppe2.git'
 REQUIRED = [
     'Flask',
+    'flask-login',
 ]
 
 setuptools.setup(
