@@ -10,6 +10,11 @@ from wtforms.validators import EqualTo
 from wtforms.validators import ValidationError
 
 
+class CommandForm(FlaskForm):
+    command = StringField('Command', validators=[DataRequired()])
+    submit = SubmitField('Execute')
+
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])

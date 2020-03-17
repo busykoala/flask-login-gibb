@@ -1,5 +1,6 @@
 from app import app
 from app import db
+from app.forms import CommandForm
 from app.forms import LoginForm
 from app.forms import RegistrationForm
 from app.models import User
@@ -11,6 +12,8 @@ from flask_login import current_user
 from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
+from subprocess import STDOUT
+from subprocess import check_output
 
 
 @app.route('/')
@@ -19,6 +22,25 @@ from flask_login import logout_user
 def index():
     user = {'username': current_user.username.capitalize()}
     return render_template('index.html', title='Home', user=user)
+
+
+@app.route('/command', methods=['GET', 'POST'])
+@login_required
+def command():
+    form = CommandForm()
+    if form.validate_on_submit():
+        command = form.command.data
+        if command is None:
+            flash('Please enter a command')
+            return redirect(url_for('command'))
+
+        try:
+            output = check_output(command.split(), stderr=STDOUT).decode()
+        except Exception as e:
+            output = str(e)
+        return output
+
+    return render_template('command.html', title='Command', form=form)
 
 
 @app.route('/logout')
