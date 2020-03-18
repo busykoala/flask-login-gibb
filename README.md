@@ -34,5 +34,9 @@ flask db upgrade
 ## Run
 
 ```
+# development server
 flask run
+
+# production server
+gunicorn app:app -w <workers> --bind <host>:<port>
 ```

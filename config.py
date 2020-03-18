@@ -1,5 +1,11 @@
+from dotenv import load_dotenv
 from pathlib import Path
 import os
+
+# load environment variables
+env_path = Path.cwd() / '.env'
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
 
 
 class Config(object):

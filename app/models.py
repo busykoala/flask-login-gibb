@@ -1,9 +1,16 @@
 from app import db
 from app import login
+from dotenv import load_dotenv
 from flask_login import UserMixin
+from pathlib import Path
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 import os
+
+# load environment variables
+env_path = Path.cwd() / '.env'
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
 
 SALT = os.getenv('SALT')
 

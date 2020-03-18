@@ -13,6 +13,7 @@ REQUIRED = [
     'flask-migrate',
     'flask-sqlalchemy',
     'flask-wtf',
+    'gunicorn',
     'python-dotenv',
 ]
 
