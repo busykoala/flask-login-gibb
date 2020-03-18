@@ -12,6 +12,7 @@ from flask_login import current_user
 from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
+from shlex import quote
 from subprocess import STDOUT
 from subprocess import check_output
 
@@ -35,7 +36,9 @@ def command():
             return redirect(url_for('command'))
 
         try:
-            output = check_output(command.split(), stderr=STDOUT).decode()
+            ex_command = ['ls', '-hal']
+            ex_command.extend(quote(command).split())
+            output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
             output = str(e)
         return output
