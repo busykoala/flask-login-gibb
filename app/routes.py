@@ -3,10 +3,12 @@ from app import db
 from app.forms import CommandForm
 from app.forms import LoginForm
 from app.forms import RegistrationForm
+from app.helper import ansi_escape
 from app.models import User
 from flask import flash
 from flask import redirect
 from flask import render_template
+from flask import request
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
@@ -25,23 +27,27 @@ def index():
     return render_template('index.html', title='Home', user=user)
 
 
-@app.route('/command', methods=['GET', 'POST'])
+@app.route('/command')
 @login_required
 def command():
-    form = CommandForm()
-    if form.validate_on_submit():
+    form = CommandForm(request.args)
+    if request.args.get('submit', False):
         command = form.command.data
-        if command is None:
-            flash('Please enter a command')
-            return redirect(url_for('command'))
-
+        if not command:
+            return render_template('command.html', title='Command', form=form,
+                                   errors=['This field is required.'])
         try:
             ex_command = ['ls', '-hal']
             ex_command.extend(quote(command).split())
             output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
-            output = str(e)
-        return output
+            return render_template('command.html', title='Command', form=form,
+                                   errors=[str(e)])
+
+        ansi_escaped = ansi_escape(output)
+        htmlified = ansi_escaped.replace('\n', '<br>')
+        return render_template('command.html', title='Command', form=form,
+                               output=htmlified)
 
     return render_template('command.html', title='Command', form=form)
 
