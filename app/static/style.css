@@ -1,0 +1,42 @@
+body {
+  background-color: #FFE8D4;
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.shell-window {
+  background-color: black;
+  padding: 0px 20px 20px 20px;
+}
+
+.shell-window .title-bar {
+  background-color: blue;
+  margin: 0 -20px 20px -20px;
+  padding: 10px 20px 1px 20px;
+}
+
+.shell-window #submit {
+  display: none;
+}
+
+.shell-window p {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.shell-window p.color-blue {
+  color: blue;
+}
+
+#command {
+  background-color: transparent;
+  border: none;
+}
+
+#command:focus {
+  outline: none;
+}
+

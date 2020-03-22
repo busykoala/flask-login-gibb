@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello, {{ user.username.capitalize() }}</h1>
-<p>On our command page it is possible to execute a systemcommand.</p>
-<p><a href="{{ url_for('command') }}">-> Command Page</a></p>
+<div class="shell-window">
+  <div class="title-bar">
+    <p>Commandy Window1</p>
+  </div>
+  {% if output %}
+  <p>{{ output|safe }}</p>
+  {% endif %}
+  <form action="" method="get" novalidate>
+    {{ form.hidden_tag() }}
+    <p class="color-blue">
+    {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+
+</div>
 {% endblock %}

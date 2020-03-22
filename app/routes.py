@@ -24,32 +24,29 @@ from subprocess import check_output
 @login_required
 def index():
     user = {'username': current_user.username.capitalize()}
-    return render_template('index.html', title='Home', user=user)
-
-
-@app.route('/command')
-@login_required
-def command():
+    username = user['username']
     form = CommandForm(request.args)
     if request.args.get('submit', False):
         command = form.command.data
         if not command:
-            return render_template('command.html', title='Command', form=form,
-                                   errors=['This field is required.'])
+            return render_template('index.html', title='Command', form=form,
+                                   errors=['This field is required.'],
+                                   user=username)
         try:
             ex_command = ['ls', '-hal']
             ex_command.extend(quote(command).split())
             output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
-            return render_template('command.html', title='Command', form=form,
-                                   errors=[str(e)])
+            return render_template('index.html', title='Command', form=form,
+                                   errors=[str(e)], user=username)
 
         ansi_escaped = ansi_escape(output)
         htmlified = ansi_escaped.replace('\n', '<br>')
-        return render_template('command.html', title='Command', form=form,
-                               output=htmlified)
+        return render_template('index.html', title='Command', form=form,
+                               output=htmlified, user=username)
 
-    return render_template('command.html', title='Command', form=form)
+    return render_template('index.html', title='Command', form=form,
+                           user=username)
 
 
 @app.route('/logout')
@@ -73,7 +70,8 @@ def login():
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
 
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html', title='Sign In', form=form,
+                           user='Guest')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -90,4 +88,5 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='Register', form=form,
+                           user='Guest')
