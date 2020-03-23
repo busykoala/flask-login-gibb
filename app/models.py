@@ -12,7 +12,7 @@ env_path = Path.cwd() / '.env'
 if env_path.exists():
     load_dotenv(dotenv_path=env_path)
 
-SALT = os.getenv('SALT')
+PEPPER = os.getenv('PEPPER')
 
 
 @login.user_loader
@@ -30,9 +30,10 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
     def set_password(self, password):
-        salted_pw = f'{SALT}{password}'
-        self.password_hash = generate_password_hash(salted_pw, method='pbkdf2:sha512')
+        peppered_pw = f'{PEPPER}{password}'
+        self.password_hash = generate_password_hash(
+            peppered_pw, method='pbkdf2:sha512', salt_length=40)
 
     def check_password(self, password):
-        salted_pw = f'{SALT}{password}'
-        return check_password_hash(self.password_hash, salted_pw)
+        peppered_pw = f'{PEPPER}{password}'
+        return check_password_hash(self.password_hash, peppered_pw)
