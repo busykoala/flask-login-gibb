@@ -5,6 +5,7 @@ from app.forms import LoginForm
 from app.forms import RegistrationForm
 from app.helper import ansi_escape
 from app.helper import LOGGER_NAME
+from app.helper import validate_input
 from app.models import User
 from flask import flash
 from flask import redirect
@@ -31,15 +32,20 @@ def index():
     username = user['username']
     form = CommandForm(request.args)
     if request.args.get('submit', False):
-        command = form.command.data
+        command = form.name.data
         if not command:
             logger.debug('Route /index was called without a command.')
             return render_template('index.html', title='Command', form=form,
                                    errors=['This field is required.'],
                                    user=username)
+        ex_command = ['host']
+        ex_command.extend([quote(x) for x in command.split()])
+        if not validate_input(ex_command):
+            flash(f'Invalid input.')
+            logger.error(f'Regex did not match at /index call.')
+            return render_template('index.html', title='Command', form=form,
+                                   errors=['Invalid input.'], user=username)
         try:
-            ex_command = ['host']
-            ex_command.extend([quote(x) for x in command.split()])
             output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
             flash(f'Invalid input: {e}')

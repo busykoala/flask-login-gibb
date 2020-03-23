@@ -31,12 +31,12 @@ body {
   color: blue;
 }
 
-#command {
+#name {
   background-color: transparent;
   border: none;
 }
 
-#command:focus {
+#name:focus {
   outline: none;
 }
 

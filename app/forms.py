@@ -11,7 +11,7 @@ from wtforms.validators import ValidationError
 
 
 class CommandForm(FlaskForm):
-    command = StringField('Command', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Execute')
 
 
