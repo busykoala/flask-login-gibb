@@ -38,10 +38,11 @@ def index():
                                    errors=['This field is required.'],
                                    user=username)
         try:
-            ex_command = ['ls', '-hal']
-            ex_command.extend(quote(command).split())
+            ex_command = ['host']
+            ex_command.extend([quote(x) for x in command.split()])
             output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
+            flash(f'Invalid input: {e}')
             logger.error(f'Route /index was called with error {e}')
             return render_template('index.html', title='Command', form=form,
                                    errors=[str(e)], user=username)

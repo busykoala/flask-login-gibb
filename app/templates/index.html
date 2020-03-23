@@ -11,7 +11,7 @@
   <form action="" method="get" novalidate>
     {{ form.hidden_tag() }}
     <p class="color-blue">
-    {{ user }}@Commandy%> ls -hal {{ form.command(size=32, autofocus='true', value='') }}
+    {{ user }}@Commandy%> host {{ form.command(size=32, autofocus='true', value='') }}
     </p>
     <p>{{ form.submit() }}</p>
   </form>
