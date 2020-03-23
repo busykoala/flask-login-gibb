@@ -19,6 +19,9 @@ flask db init
 # add .env file holding the flask secret (csrf) and the password salt
 echo "SECRET_KEY=\"very-secret\"" >> .env
 echo "SALT=\"very-secret\"" >> .env
+
+# add logfile and add path to the env variables.
+echo "LOG_PATH=\"/var/log/flask-login-gibb.log\"" >> .env
 ```
 
 ## Migrate
