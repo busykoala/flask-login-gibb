@@ -8,9 +8,10 @@ VERSION = '1.0.0'
 AUTHOR = 'gruppe_2'
 URL = 'git@gitlab.iet-gibb.ch:mos111952/183_lb3_gruppe2.git'
 REQUIRED = [
-    'Flask',
+    'Flask>=1.1.2',
     'flask-login',
     'flask-migrate',
+    'flask-seeder',
     'flask-sqlalchemy',
     'flask-wtf',
     'gunicorn',
