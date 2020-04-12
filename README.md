@@ -153,6 +153,9 @@ flask db migrate -m "users table"
 
 # upgrade
 flask db upgrade
+
+# add lb3 user to database
+flask seed run
 ```
 
 ## Run
