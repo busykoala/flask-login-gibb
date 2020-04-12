@@ -15,4 +15,23 @@
     <p>{{ form.submit() }}</p>
   </form>
 </div>
+<div>
+  <h2>Usage</h2>
+  <p class="mono">Command Pattern: host [OPTIONS] &lt;hostname&gt; [NAME SERVER]</p>
+  <h3>Options</h3>
+  <ul class="mono">
+    <li>-a: is equivalent to -v -t ANY</li>
+    <li>-C: compares SOA records on authoritative nameservers</li>
+    <li>-d: is equivalent to -v</li>
+    <li>-i: IP6.INT reverse lookups</li>
+    <li>-l: lists all hosts in a domain, using AXFR</li>
+    <li>-r: disables recursive processing</li>
+    <li>-T: enables TCP/IP mode</li>
+    <li>-v: enables verbose output</li>
+    <li>-V: print version number and exit</li>
+    <li>-w: specifies to wait forever for a reply</li>
+    <li>-4: use IPv4 query transport only</li>
+    <li>-6: use IPv6 query transport only</li>
+  </ul>
+</div>
 {% endblock %}

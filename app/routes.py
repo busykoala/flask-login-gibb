@@ -30,7 +30,7 @@ logger = logging.getLogger(LOGGER_NAME)
 def index():
     user = {'username': current_user.username.capitalize()}
     username = user['username']
-    form = CommandForm(request.args, csrf_enabled=False)
+    form = CommandForm(request.args, meta={'csrf': False})
     if request.args.get('submit', False):
         command = form.name.data
         if not command:
@@ -48,10 +48,10 @@ def index():
         try:
             output = check_output(ex_command, stderr=STDOUT).decode()
         except Exception as e:
-            flash(f'Invalid input: {e}')
+            flash(f'Invalid input.')
             logger.error(f'Route /index was called with error {e}')
             return render_template('index.html', title='Command', form=form,
-                                   errors=[str(e)], user=username)
+                                   errors=['Invalid input.'], user=username)
 
         ansi_escaped = ansi_escape(output)
         htmlified = ansi_escaped.replace('\n', '<br>')
