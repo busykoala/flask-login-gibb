@@ -35,7 +35,7 @@ password_hash = db.Column(db.String(128))
 
 New users can register via the sign-up form at `/register`. When registering new users the uniqueness of the username and email is ensured.
 
-### User Authentication & Persistend password storage
+### User Authentication & persistent password storage
 
 The dependency `werkzeug.security.generate_password_hash` implements storing individually salted passwords. As an additional security measure an application specific pepper is used, making brute-force, as well as rainbow table and dictionary attacks infeasible.
 
