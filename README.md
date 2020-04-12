@@ -7,16 +7,16 @@ command execution using flask.
 
 ### Requirements Overview
 
-| Requirement                                                  | implemented                                         | implemented in                      |
-| ------------------------------------------------------------ | --------------------------------------------------- | ----------------------------------- |
-| Login over HTTP-POST with user 'lb3' and password 'sml12345' | ✓                                                   | `app/routes.py`                     |
-| Session-Handling post-login for executing the sys command    | ✓                                                   | `app/routes.py`                     |
-| Sys command over HTTP-GET ('name="sysopt"')                  | ✓ (requires additional parameter `&submit=Execute`) | `app/routes.py`                     |
-| Logging over STDOUT/ERR or log file                          | ✓ (both possible)                                   | `app/helper.py`                     |
-| Secure and persistent password storage                       | ✓                                                   | `app/models.py`                     |
-| Encrypted communication over ssl                             | ✓ (requires certificates)                           | (via `gunicorn`, see [Run](##Run) ) |
-| (Optional) Seucure user creation over GUI                    | ✓                                                   | `app/routes.py`                     |
-| (Optional) Useful and appealing GUI / UX                     | ✓                                                   | (see [GUI](###GUI))                 |
+| Requirement                                                  | implemented                                         | implemented in      |
+| ------------------------------------------------------------ | --------------------------------------------------- | ------------------- |
+| Login over HTTP-POST with user 'lb3' and password 'sml12345' | ✓                                                   | `app/routes.py`     |
+| Session-Handling post-login for executing the sys command    | ✓                                                   | `app/routes.py`     |
+| Sys command over HTTP-GET ('name="sysopt"')                  | ✓ (requires additional parameter `&submit=Execute`) | `app/routes.py`     |
+| Logging over STDOUT/ERR or log file                          | ✓ (both possible)                                   | `app/helper.py`     |
+| Secure and persistent password storage                       | ✓                                                   | `app/models.py`     |
+| Encrypted communication over ssl                             | ✓ (via `gunicorn`)                                  | (see [Run](##Run))  |
+| (Optional) Seucure user creation over GUI                    | ✓                                                   | `app/routes.py`     |
+| (Optional) Useful and appealing GUI / UX                     | ✓                                                   | (see [GUI](###GUI)) |
 
 ### Models
 
