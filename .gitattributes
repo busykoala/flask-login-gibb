@@ -1,0 +1,6 @@
+* text eol=lf
+*.py text
+*.html text
+*.css text
+*.*env text
+Dockerfile text
