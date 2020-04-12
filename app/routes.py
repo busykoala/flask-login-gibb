@@ -38,7 +38,7 @@ def index():
             return render_template('index.html', title='Command', form=form,
                                    errors=['This field is required.'],
                                    user=username)
-        ex_command = ['host']
+        ex_command = [] if command.startswith('host') else ['host']
         ex_command.extend([quote(x) for x in command.split()])
         if not validate_input(ex_command):
             flash(f'Invalid input.')
