@@ -32,7 +32,7 @@ class User(UserMixin, db.Model):
     def set_password(self, password):
         peppered_pw = f'{PEPPER}{password}'
         self.password_hash = generate_password_hash(
-            peppered_pw, method='pbkdf2:sha512', salt_length=40)
+            peppered_pw, method='pbkdf2:sha512', salt_length=10)
 
     def check_password(self, password):
         peppered_pw = f'{PEPPER}{password}'
