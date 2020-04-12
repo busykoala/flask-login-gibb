@@ -11,6 +11,7 @@ REQUIRED = [
     'Flask>=1.1.2',
     'flask-login',
     'flask-migrate',
+    'flask-seeder',
     'flask-sqlalchemy',
     'flask-wtf',
     'gunicorn',

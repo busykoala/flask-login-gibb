@@ -19,6 +19,7 @@ RUN python setup.py install
 RUN flask db init
 RUN flask db migrate -m "users table"
 RUN flask db upgrade
+RUN flask seed run
 
 # Expose port 5000 (default flask port)
 EXPOSE 5000
