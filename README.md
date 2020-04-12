@@ -145,7 +145,7 @@ flask db init
 # LOG_PATH="/var/log/flask-login-gibb.log"
 ```
 
-## Migration
+#### Migration
 
 ```
 # migrate table users
@@ -158,7 +158,7 @@ flask db upgrade
 flask seed run
 ```
 
-## Run
+#### Run
 
 ```
 # development server
