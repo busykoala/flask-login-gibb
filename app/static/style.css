@@ -1,5 +1,5 @@
 body {
-  background-color: #FFE8D4;
+  background-color: #ffe8d4;
 }
 
 .navbar {
@@ -28,15 +28,14 @@ body {
 }
 
 .shell-window p.color-blue {
-  color: blue;
+  color: #a8a8ff;
 }
 
-#name {
+#cmd_input {
   background-color: transparent;
   border: none;
 }
 
-#name:focus {
+#cmd_input:focus {
   outline: none;
 }
-
