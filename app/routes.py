@@ -30,7 +30,7 @@ logger = logging.getLogger(LOGGER_NAME)
 def index():
     user = {'username': current_user.username.capitalize()}
     username = user['username']
-    form = CommandForm(request.args)
+    form = CommandForm(request.args, csrf_enabled=False)
     if request.args.get('submit', False):
         command = form.name.data
         if not command:
