@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="shell-window">
+<div onclick="document.getElementById('cmd_input').focus()" class="shell-window">
   <div class="title-bar">
     <p>Commandy Window1</p>
   </div>
@@ -9,12 +9,10 @@
   <p>{{ output|safe }}</p>
   {% endif %}
   <form action="" method="get" novalidate>
-    {{ form.hidden_tag() }}
     <p class="color-blue">
-    {{ user }}@Commandy%> host {{ form.name(size=32, autofocus='true', value='') }}
+      {{ user }}@Commandy%> host {{ form.name(size=32, autofocus='true', value='', id='cmd_input') }}
     </p>
     <p>{{ form.submit() }}</p>
   </form>
-
 </div>
 {% endblock %}
