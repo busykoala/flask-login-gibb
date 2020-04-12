@@ -5,6 +5,19 @@ command execution using flask.
 
 ## Project Documentation
 
+### Requirements Overview
+
+| Requirement                                                  | implemented                                         | implemented in                      |
+| ------------------------------------------------------------ | --------------------------------------------------- | ----------------------------------- |
+| Login over HTTP-POST with user 'lb3' and password 'sml12345' | ✓                                                   | `app/routes.py`                     |
+| Session-Handling post-login for executing the sys command    | ✓                                                   | `app/routes.py`                     |
+| Sys command over HTTP-GET ('name="sysopt"')                  | ✓ (requires additional parameter `&submit=Execute`) | `app/routes.py`                     |
+| Logging over STDOUT/ERR or log file                          | ✓ (both possible)                                   | `app/helper.py`                     |
+| Secure and persistent password storage                       | ✓                                                   | `app/models.py`                     |
+| Encrypted communication over ssl                             | ✓ (requires certificates)                           | (via `gunicorn`, see [Run](##Run) ) |
+| (Optional) Seucure user creation over GUI                    | ✓                                                   | `app/routes.py`                     |
+| (Optional) Useful and appealing GUI / UX                     | ✓                                                   | (see [GUI](###GUI))                 |
+
 ### Models
 
 The application currently requires uses a user model, used for authentication against the application.
@@ -53,7 +66,7 @@ To prevent command injections the user input is matched against a regex containi
 
 ```py
 to_be_validated = ' '.join(parameter_list)
-pattern = re.compile(r'^host(?:\s+-[aCdilrTvVw46]+)*(?:\s[^-][a-zA-Z\.\-0-9]+[^\s]){1,2}$')
+pattern = re.compile(r'^host(?:\s+-[aCdilrTvVw46]+)*(?:\s[^-][a-zA-Z\.\-0-9]+[^\s]){0,2}$')
 return pattern.match(to_be_validated)
 ```
 
@@ -85,15 +98,15 @@ Additionally the DEBUG level is logged to the standard output.
 
 ### SSL/TLS
 
-This is not part of the application. The installed production server `gunicorn` lets you start the application using a private-public key pair and choose the port. For more information about the command see the section `Run`.
+This is not part of the application. The installed production server `gunicorn` lets you start the application using a private-public key pair and choose the port. For more information on enabling SSL/TLS visit the [Run](##Run) section.
 
 ### GUI
 
-The Application has a very nice GUI. We implemented the command input/output as it was in a shell environment with dark background and a prompt.
+The Application uses a functional GUI with supportive UI styling. The command input/output simulates a shell environment by using a dark background with a blue-ish font.
 
-The menu is a basic bootstrap menu having the familiar icons for login/register and for the logout.
+The menu is a basic bootstrap menu utilizing familiar icons for login/register and for the logout. The home button is customized so that the users can see whether they are logged in.
 
-The home button is customized so that the user can see whether they are logged in.
+Notifications are highlighted by using a different background color.
 
 ## Install
 
