@@ -1,9 +1,10 @@
 FROM frolvlad/alpine-python3
 
-# Install bash and curl
+# Install bash, curl and host
 RUN apk update
 RUN apk add bash
 RUN apk add curl
+RUN apk add bind-tools
 
 WORKDIR /app
 COPY . .
