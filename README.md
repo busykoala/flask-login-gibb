@@ -65,6 +65,8 @@ The application implements the system command `host`. It enables logged in users
 To prevent command injections the user input is matched against a regex containing all whitelisted command parameters:
 
 ```py
+# app/helper.py
+
 to_be_validated = ' '.join(parameter_list)
 pattern = re.compile(r'^host(?:\s+-[aCdilrTvVw46]+)*(?:\s[^-][a-zA-Z\.\-0-9]+[^\s]){0,2}$')
 return pattern.match(to_be_validated)
@@ -114,7 +116,7 @@ Notifications are highlighted by using a different background color.
 
 Currently a docker build can be used for local development.
 
-```
+```sh
 # Clone the project
 git clone git@gitlab.iet-gibb.ch:mos111952/183_lb3_gruppe2.git
 cd 183_lb3_gruppe2
@@ -128,7 +130,7 @@ docker run -p 5000:5000 183_lb3_gruppe2:0.1
 
 ### Manual Install
 
-```
+```sh
 # clone and install dependencies in a virtual environment
 git clone git@gitlab.iet-gibb.ch:mos111952/183_lb3_gruppe2.git
 cd 183_lb3_gruppe2
@@ -147,7 +149,7 @@ flask db init
 
 #### Migration
 
-```
+```sh
 # migrate table users
 flask db migrate -m "users table"
 
@@ -160,7 +162,7 @@ flask seed run
 
 #### Run
 
-```
+```sh
 # development server
 flask run
 
